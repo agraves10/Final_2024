@@ -51,6 +51,16 @@ This plot represents the population of males people and the relationship of covi
 
 The plot shows covid19 being very low with those that took the vaccine in comparison to those with the placebo. The Placebo compared to the vaccine is about 3:1 in size.
 
+
+### Numerical results
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=guy)
+rowPerc(table1)
+colPerc(table1)
+```
+
+Only 26.2% of males who received the vaccine contracted COVID-19, whereas 73.8% of those who did not receive the vaccine were infected. This suggests that the vaccine shows great promise.
 ## Females
 
 
