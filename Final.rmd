@@ -72,10 +72,17 @@ guysfish <- fisher.test(table1)
 guysfish
 ```
 
-
 The key takeaway from these results is the outcome of Fisher's Exact test. The p-value of 2.2e-16 (0.00000000000000022) is exceptionally small, indicating that these results are highly unlikely to be due to chance.
-
 Additionally, our odds ratio of approximately 2.8 demonstrates that the vaccine is effective in preventing COVID-19 when compared to a placebo.
+
+### Effectiveness Confidence Interval `r low`  to `r hi`
+```{r}
+effect <- guysfish$p.value/(guysfish$p.value +1)
+effectivenessguy = guysfish$estimate/(guysfish$estimate +1)100
+print(effectivenessguy)
+```
+The odds ratio of the males with vaccines vs those with placebos has a ratio greater than 70 meaning we have a effective vaccine for males. 
+
 
 
 ## Females
