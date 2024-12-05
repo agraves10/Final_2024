@@ -172,6 +172,18 @@ This plot represents the population of people who answered  Druguser to drug use
 
 Those who are drug users who took the vaccine had about 80% infection compared to those who took a placebo had about 8% infected. This is a ration of 1:10. 
 
+### Numerical results
+
+```{r}
+table1 <- xtabs(~infected + treatment, data= Druguser)
+rowPerc(table1)
+colPerc(table1)
+```
+ 
+
+These numerical results show specific percentages of drugusers that got covid-19 after taking the placebo and taking the vaccine.
+Drugusers had a percentage of 91.7% having the vaccine who got infected. Compared to those with a placebo who had 8.3% got infected. This looks like a horrible vaccine for drugusers to take.
+
 
 
 
