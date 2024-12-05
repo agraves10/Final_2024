@@ -183,20 +183,41 @@ colPerc(table1)
 
 These numerical results show specific percentages of drugusers that got covid-19 after taking the placebo and taking the vaccine.
 Drugusers had a percentage of 91.7% having the vaccine who got infected. Compared to those with a placebo who had 8.3% got infected. This looks like a horrible vaccine for drugusers to take.
+### Inferential 
+
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+drugfish <- fisher.test(table1)
+drugfish
+```
+
+
+The p-value is 0.000000000003. This in a small number and with that being said, Meaaing something is happening in this graph.
+
+The Fishers's Exact Test illustrates that the odds ratio is 0.087
+This shows that the vaccine is horrible and should never be used for drug users especially with how small the odds ratio is.
+
+```{r}
+effect <- drugfish$p.value/(drugfish$p.value +1)
+effectivenessdrug = drugfish$estimate/(drugfish$estimate +1)*100
+print(effectivenessdrug)
+```
+
+```{r}
+low=(drugfish$conf.int[1]/(drugfish$conf.int[1] +1))*100
+hi=(drugfish$conf.int[2]/(drugfish$conf.int[2] +1))*100
+options(digits=2)
+```
+
+## Effectiveness Confidence Interval `r low`  to `r hi`
 
 
 
 
+Above, is the effectiveness for the covid-19 for guys. If the effectiveness is above 50% that means that the vaccine is effective. The confidence interval odds ratio shows to be an 8, this is less than 50 and this is very very small meaning this vaccine should never be conssidered and it is worse that taking nothing as it gives covid19 and taking nothing is better than this vaccine.
 
-
-
-
-
-## LGBTQ
-
-
-
-## Druggies
 
 
 # Overall Results and Conclusions
