@@ -1,12 +1,15 @@
 ---
 title: "Covid91 vaccine study Final2024"
 author: "Ashia Graves!"
-output: 
+date: "December 2024`"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '5'
   html_document:
     number_sections: true
     toc: true
     toc_depth: 5
-date: "December 2024`" 
 ---
 
 ```{r include=FALSE,echo=FALSE}
@@ -65,6 +68,8 @@ Only 26.2% of males who received the vaccine contracted COVID-19, whereas 73.8% 
 
 ### Inferential 
 
+
+
 ```{r}
 chisq.test(table1)
 chisqtestGC(table1)
@@ -72,8 +77,10 @@ guysfish <- fisher.test(table1)
 guysfish
 ```
 
-The key takeaway from these results is the outcome of Fisher's Exact test. The p-value of 2.2e-16 (0.00000000000000022) is exceptionally small, indicating that these results are highly unlikely to be due to chance.
-Additionally, our odds ratio of approximately 2.8 demonstrates that the vaccine is effective in preventing COVID-19 when compared to a placebo.
+The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at 2.2e-16  0.00000000000000022. Seeing this number means that these results are not likely to occur by chance.
+
+Our odds ratio of about 2.8 proves that this vaccine is effective in stopping covid19 compared to a placebo.
+
 
 ### Effectiveness Confidence Interval `r low`  to `r hi`
 ```{r}
@@ -84,8 +91,22 @@ print(effectivenessguy)
 The odds ratio of the males with vaccines vs those with placebos has a ratio greater than 70 meaning we have a effective vaccine for males. 
 
 
+### Barplot
 
-## Females
+```{r}
+Females <- gal %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+basicC <- ggplot(Females,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+basicCC <- ggplot(Females,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+This plot illustrates the relationship between COVID-19 infection rates in females and whether they received the vaccine or the placebo.
+
+The data shows a 2:1 ratio of infection rates between the vaccine and placebo groups. Approximately 36% of females who received the vaccine contracted COVID-19, compared to around 65% of females who received the placebo.  
+
+
 
 
 ## LGBTQ
