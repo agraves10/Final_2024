@@ -1,20 +1,14 @@
 ---
 title: "Covid91 vaccine study Final2024"
 author: "Ashia Graves!"
-date: "December 2024`"
-output:
-  pdf_document:
-    toc: true
-    toc_depth: '5'
+output: 
   html_document:
     number_sections: true
     toc: true
     toc_depth: 5
-  word_document:
-    toc: true
-    toc_depth: '5'
+date: "`r Sys.Date()`" 
 ---
-
+ 
 ```{r include=FALSE,echo=FALSE}
 require(tidyverse)
 require(tigerstats)
@@ -80,18 +74,25 @@ guysfish <- fisher.test(table1)
 guysfish
 ```
 
+
 The information to play close attention to among all of these results is the output of the Fisher's Exact test. The p-value displayed above is extremely small at 2.2e-16  0.00000000000000022. Seeing this number means that these results are not likely to occur by chance.
 
 Our odds ratio of about 2.8 proves that this vaccine is effective in stopping covid19 compared to a placebo.
-
-
-
-### Effectiveness Confidence Interval `r low`  to `r hi`
 ```{r}
 effect <- guysfish$p.value/(guysfish$p.value +1)
-effectivenessguy = guysfish$estimate/(guysfish$estimate +1)100
+effectivenessguy = guysfish$estimate/(guysfish$estimate +1)*100
 print(effectivenessguy)
 ```
+
+```{r}
+low=(guysfish$conf.int[1]/(guysfish$conf.int[1] +1))*100
+hi=(guysfish$conf.int[2]/(guysfish$conf.int[2] +1))*100
+options(digits=2)
+```
+
+### Effectiveness Confidence Interval `r low`  to `r hi`
+
+
 The odds ratio of the males with vaccines vs those with placebos has a ratio greater than 70 meaning we have a effective vaccine for males. 
 
 
@@ -221,3 +222,14 @@ Above, is the effectiveness for the covid-19 for guys. If the effectiveness is a
 
 
 # Overall Results and Conclusions
+In conclusion, the effectiveness of the COVID vaccine varies across different subgroups. Starting with the male group, we reject the null hypothesis. Based on the bar chart, numerical data, and the results of the chi-squared and Fisher’s Exact tests, we can conclude that men who received the COVID vaccine and contracted the virus experienced fewer symptoms compared to those who received the placebo. For men who were unvaccinated and did not contract COVID, there was little to no difference between the groups. The infection rate in the placebo group was 2.55%, while the vaccinated group had an infection rate of 1.15%, suggesting the vaccine’s effectiveness in men. Therefore, we reject the null hypothesis for the male subgroup.
+
+For the female group, we also reject the null hypothesis. All tests indicate that women who received the COVID vaccine and contracted the virus experienced fewer symptoms than those who received the placebo. The unvaccinated, non-infected women showed little to no difference compared to each other. In the placebo group, the infection rate was 2.04%, while the vaccinated group had an infection rate of 1.37%, further supporting the vaccine’s effectiveness in women. Thus, we reject the null hypothesis for the female subgroup as well.
+
+When comparing the male and female subgroups, women had slightly lower infection rates with both the COVID vaccine and placebo, by 0.22% and 0.51%, respectively. While this difference is minimal, the data suggests that women experience fewer symptoms with the vaccine.
+
+In the LGBTQ subgroup, we also reject the null hypothesis, but with different results. The data shows that the vaccine had a negative effect in this group. LGBTQ individuals who received the COVID vaccine and contracted the virus experienced more severe symptoms than those who received the placebo. The non-vaccinated, non-infected LGBTQ group showed little to no difference between the two groups. The placebo group had an infection rate of 0.66%, while the vaccinated group had an infection rate of 3.54%, a significant difference. Therefore, we reject the null hypothesis, as the vaccine had an impact on this subgroup, though negative.
+
+For the drug user subgroup, the results mirror those of the LGBTQ subgroup. We reject the null hypothesis, as drug users who received the COVID vaccine and contracted the virus experienced significantly more symptoms compared to those who received the placebo. The vaccinated drug user group had an infection rate of 3.06%, while the placebo group had an infection rate of 0.4%, showing a substantial difference in the severity of symptoms. Thus, we reject the null hypothesis in this case as well.
+
+When comparing all the subgroups based on the effects of the COVID vaccine, the female group showed the best results, experiencing fewer symptoms with the vaccine. The LGBTQ subgroup, on the other hand, had the worst outcomes, experiencing the most severe symptoms despite receiving the vaccine. The male group had results similar to the female group, though slightly less favorable, and drug users experienced only marginally fewer symptoms than the LGBTQ group (by 0.48%). Based on these findings, I would recommend the COVID vaccine for males and females who are not drug users or LGBTQ, as it had a more positive effect in these groups.
