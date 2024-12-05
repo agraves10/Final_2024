@@ -104,7 +104,17 @@ basicCC + geom_bar(stat="identity", position = "dodge")
 ```
 This plot illustrates the relationship between COVID-19 infection rates in females and whether they received the vaccine or the placebo.
 
-The data shows a 2:1 ratio of infection rates between the vaccine and placebo groups. Approximately 36% of females who received the vaccine contracted COVID-19, compared to around 65% of females who received the placebo.  
+The data shows a 2:1 ratio of infection rates between the vaccine and placebo groups. Approximately 36% of females who received the vaccine contracted COVID-19, compared to around 65% of females who received the placebo. 
+
+```{r}
+table1 <- xtabs(~infected + treatment, data= Druguser)
+rowPerc(table1)
+colPerc(table1)
+```
+ 
+### Numerical results
+These numerical results show specific percentages of drugusers that got covid-19 after taking the placebo and taking the vaccine.
+Drugusers had a percentage of 91.7% having the vaccine who got infected. Compared to those with a placebo who had 8.3% got infected. This looks like a horrible vaccine for drugusers to take.
 
 
 
